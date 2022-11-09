@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\SliderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,6 +28,7 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function (){
     Route::post('/logout',[AuthController::class,'logout']);
     // Category
     Route::get('view-category',[CategoryController::class,'index']);
+
     Route::post('store-category',[CategoryController::class,'store']);
     Route::get('edit-category/{id}',[CategoryController::class,'edit']);
     Route::put('update-category/{id}',[CategoryController::class,'update']);
@@ -34,7 +36,12 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function (){
     Route::get('all-category',[CategoryController::class,'allCategory']);
     //Product
     Route::post('store-product',[ProductController::class,'store']);
-
-
+    Route::get('view-product',[ProductController::class,'index']);
+    Route::get('edit-product/{id}',[ProductController::class,'edit']);
+    Route::post('update-product/{id}',[ProductController::class,'update']);
+    //Slider
+    Route::post('store-slider',[SliderController::class,'store']);
 
 });
+Route::get('view-category',[CategoryController::class,'index']);
+Route::get('view-product',[ProductController::class,'index']);

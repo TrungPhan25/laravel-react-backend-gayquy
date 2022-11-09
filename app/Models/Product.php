@@ -10,17 +10,23 @@ class Product extends Model
     use HasFactory;
     protected $table='products';
     protected $fillable=[
-        'category_id',
+        'categorySlug',
         'slug',
-        'name',
+        'title',
         'description',
-        'brand',
         'selling_price',
         'original_price',
         'qty',
-        'image',
-        'featured',
-        'popular',
-        'status',
+        'image01',
+        'image02',
     ];
+
+    protected $casts = [
+        'size' => 'array'
+    ];
+
+    protected $with=['category'];
+    public function category(){
+        return $this->belongsTo(Category::class,'categorySlug','categorySlug');
+    }
 }

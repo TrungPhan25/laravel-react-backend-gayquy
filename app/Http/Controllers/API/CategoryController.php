@@ -12,8 +12,8 @@ class CategoryController extends Controller
 {
     public function store(Request $request){
         $validator= Validator::make($request->all(),[
-            'slug'=>'required|max:191',
-            'name'=>'required|max:191',
+            'categorySlug'=>'required|max:191',
+            'display'=>'required|max:191',
         ]);
 
         if ($validator->fails()){
@@ -29,8 +29,8 @@ class CategoryController extends Controller
                 'prefix' => 'CT']);
             $category = new Category;
             $category->id_category=$CT;
-            $category->slug=$request->input('slug');
-            $category->name=$request->input('name');
+            $category->categorySlug=$request->input('categorySlug');
+            $category->display=$request->input('display');
             $category->description=$request->input('description');
             $category->status=$request->input('status')== true ? '1':'0';
             $category->save();
@@ -77,8 +77,8 @@ class CategoryController extends Controller
 //        $category = Category::find($id);
 
         $validator= Validator::make($request->all(),[
-            'slug'=>'required|max:191',
-            'name'=>'required|max:191',
+            'categorySlug'=>'required|max:191',
+            'display'=>'required|max:191',
         ]);
 
         if ($validator->fails()){
@@ -89,8 +89,8 @@ class CategoryController extends Controller
         }else{
             $category = Category::find($id);
             if ($category){
-                $category->slug=$request->input('slug');
-                $category->name=$request->input('name');
+                $category->categorySlug=$request->input('categorySlug');
+                $category->display=$request->input('display');
                 $category->description=$request->input('description');
                 $category->status=$request->input('status');
                 $category->save();
