@@ -41,7 +41,13 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function (){
     Route::post('update-product/{id}',[ProductController::class,'update']);
     //Slider
     Route::post('store-slider',[SliderController::class,'store']);
+    Route::get('view-slider',[SliderController::class,'index']);
+    Route::get('edit-slider/{id}',[SliderController::class,'edit']);
+    Route::post('update-slider/{id}',[SliderController::class,'update']);
+
 
 });
 Route::get('view-category',[CategoryController::class,'index']);
 Route::get('view-product',[ProductController::class,'index']);
+Route::get('view-slider',[SliderController::class,'index']);
+

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
@@ -17,7 +18,7 @@ class ProductController extends Controller
             'slug'=>'required|max:191',
             'title'=>'required|max:191',
             'selling_price'=>'required',
-            'original_price'=>'required',
+            'price'=>'required',
             'qty'=>'required',
             'image01'=>'required|image|mimes:jpg,jpeg,png|max:2048',
             'image02'=>'required|image|mimes:jpg,jpeg,png|max:2048',
@@ -36,7 +37,7 @@ class ProductController extends Controller
             $product->description=$request->input('description');
 
             $product->selling_price=$request->input('selling_price');
-            $product->original_price=$request->input('original_price');
+            $product->price=$request->input('price');
             $product->qty=$request->input('qty');
 
             if($request->hasFile('image01')){
@@ -71,6 +72,8 @@ class ProductController extends Controller
 
     public function index(){
         $products=Product::all();
+//        $products= DB::table('products')->select('size')->get()->toArray();
+//        $products=json_code($products);
         return response()->json([
             'status'=>200,
             'products'=>$products,
@@ -103,7 +106,7 @@ class ProductController extends Controller
             'slug'=>'required|max:191',
             'title'=>'required|max:191',
             'selling_price'=>'required',
-            'original_price'=>'required',
+            'price'=>'required',
             'qty'=>'required',
         ]);
         if ($validator->fails()){
@@ -120,7 +123,7 @@ class ProductController extends Controller
                     $product->title=$request->input('title');
                     $product->description=$request->input('description');
                     $product->selling_price=$request->input('selling_price');
-                    $product->original_price=$request->input('original_price');
+                    $product->price=$request->input('price');
                     $product->qty=$request->input('qty');
 
                     if($request->hasFile('image01')){
