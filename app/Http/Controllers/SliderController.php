@@ -59,7 +59,6 @@ class SliderController extends Controller
                 'status'=>200,
                 'slider'=>$slider,
                 'img'=>Slider::find($id)->select('img')->first(),
-
             ]);
         }else{
             return response()->json([

@@ -90,7 +90,7 @@ class ProductController extends Controller
                 'size'=>Product::find($id)->select('size')->first(),
                 'image01'=>Product::find($id)->select('image01')->first(),
                 'image02'=>Product::find($id)->select('image02')->first(),
-
+                'statuss' =>Product::find($id)->select('status')->first(),
             ]);
         }else{
             return response()->json([
@@ -149,7 +149,7 @@ class ProductController extends Controller
                         $file1->move('uploads/product/',$filename1);
                         $product->image02='uploads/product/'.$filename1;
                     }
-
+                $product->status=$request->input('status');
                 $product->size=json_decode($request->input('size'));
 
                 $product->save();
