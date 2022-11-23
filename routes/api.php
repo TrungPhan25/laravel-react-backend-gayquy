@@ -75,4 +75,7 @@ Route::post('order',[OrderController::class,'store']);
 //Donate
 Route::post('store-donor',[DonorController::class,'store']);
 Route::get('all-donor',[DonorController::class,'indexAll']);
-
+Route::get('view-blog',[BlogController::class,'index']);
+Route::get('view-blog/{slug}',[BlogController::class,'editSlug']);
+//Check
+Route::get('check-status/{code}',[OrderController::class,'check']);

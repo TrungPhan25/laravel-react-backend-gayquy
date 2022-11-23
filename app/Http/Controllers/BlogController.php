@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -33,6 +35,20 @@ class BlogController extends Controller
             ]);
         }
     }
+    public function editSlug($slug){
+        $blog=Blog::where('slug',$slug)->first();
+        if($blog){
+            return response()->json([
+                'status'=>200,
+                'blog'=>$blog
+            ]);
+        }else{
+            return response()->json([
+                'status'=>404,
+                'error'=>'Không tìm thấy'
+            ]);
+        }
+    }
 
     public function store(Request $request){
         $validator= Validator::make($request->all(),[
@@ -50,6 +66,7 @@ class BlogController extends Controller
         }else {
             $blog= new Blog();
             $blog->title=$request->input('title');
+            $blog->slug=Str::slug($request->input('title'));
             if($request->hasFile('image')){
                 $file= $request->file('image');
                 $ext= $file->getClientOriginalExtension();
@@ -121,7 +138,7 @@ class BlogController extends Controller
                     'status'=>200,
                     'massage'=>'Thành công'
                 ]);
-            
+
             }else{
                 return response()->json([
                     'status'=>404,

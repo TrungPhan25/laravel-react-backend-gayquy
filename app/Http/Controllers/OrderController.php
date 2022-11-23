@@ -13,6 +13,23 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
+    public function check($code){
+        $order=Customer::where('customer_id',$code)->first();
+        if($order){
+            return response()->json([
+                'status'=>200,
+                'order'=>$code,
+                'status_code'=>$order['status'],
+                'message'=>'Check Hàng Thành Công'
+            ]);
+        }else{
+            return response()->json([
+                'status'=>422,
+                'error'=>'Not Found',
+            ]);
+        }
+    }
+
     public function index(){
         $orders=Customer::all();
         return response()->json([
