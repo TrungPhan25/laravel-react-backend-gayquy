@@ -1,5 +1,6 @@
 
 <h3> Xin chào; {{$name}} Bạn đã đặt hàng thành công</h3>
+<h1>Mã đặt hàng của bạn là: {{$customer_id}}</h1>
 <table>
     @php
     $totla_price=0;

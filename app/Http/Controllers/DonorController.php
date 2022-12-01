@@ -75,7 +75,7 @@ class DonorController extends Controller
         if ($donor){
             $donor->status=$request->input('status');
 
-            SendMail::dispatch($donor['email'],$donor['name'],[],1)->delay(now()->addSeconds(2));
+            SendMail::dispatch($donor['email'],$donor['name'],'donate',[],1)->delay(now()->addSeconds(2));
 
 
             $donor->save();

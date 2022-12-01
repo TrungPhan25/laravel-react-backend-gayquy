@@ -138,7 +138,7 @@ class OrderController extends Controller
 
                 DB::commit();
 
-                SendMail::dispatch($request->input('email'),$request->input('name'),$carts,0)->delay(now()->addSeconds(2));
+                SendMail::dispatch($request->input('email'),$request->input('name'),$ctm_id,$carts,0)->delay(now()->addSeconds(2));
 
                 return response()->json([
                     'status'=>200,

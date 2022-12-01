@@ -19,12 +19,13 @@ class OrderShipped extends Mailable
     protected $name;
     protected $carts;
     protected $status;
-    public function __construct($name,$carts,$status)
+    protected $customer_id;
+    public function __construct($name,$carts,$status,$customer_id)
     {
         $this->name=$name;
         $this->carts=$carts;
         $this->status=$status;
-
+        $this->customer_id=$customer_id;
     }
 
     /**
@@ -37,7 +38,8 @@ class OrderShipped extends Mailable
         if($this->status==0){
             return $this->view('mail.order',[
                 'name'=>$this->name,
-                'carts'=>$this->carts
+                'carts'=>$this->carts,
+                'customer_id'=>$this->customer_id,
             ]);
         }elseif ($this->status==1){
             return $this->view('mail.donor',[
